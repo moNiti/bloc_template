@@ -38,6 +38,7 @@ dependencies:
   flutter_bloc: ^8.0.1
   bloc: ^8.0.2
   shared_preferences: ^2.0.13
+  provider: ^6.0.2
   # GraphQL
   graphql_flutter: ^5.0.0
   fresh_graphql: ^0.5.1
