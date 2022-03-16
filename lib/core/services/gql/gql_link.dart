@@ -7,10 +7,18 @@ class GqlLink {
   factory GqlLink() {
     return _gqlLink;
   }
-  GqlLink._internal();
+  GqlLink._internal() {
+    initFreshLink();
+    initErrorLink();
+  }
+  late ErrorLink _errorLink;
+  late FreshLink _freshLink;
 
-  ErrorLink get errorLink {
-    return ErrorLink(
+  ErrorLink get errorLink => _errorLink;
+  FreshLink get freshLink => _freshLink;
+
+  void initErrorLink() {
+    _errorLink = ErrorLink(
       // onException: (request, forward, exception) {
       //   if (exception is RevokeTokenException) {
       //     throw UnauthorizedException();
@@ -43,8 +51,8 @@ class GqlLink {
     );
   }
 
-  FreshLink get freshLink {
-    return FreshLink(
+  void initFreshLink() {
+    _freshLink = FreshLink(
       tokenHeader: (token) => {"Authorization": "Bearer $token"},
       tokenStorage: InMemoryTokenStorage(),
       refreshToken: (token, client) {
